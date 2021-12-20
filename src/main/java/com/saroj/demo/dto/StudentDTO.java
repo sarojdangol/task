@@ -17,6 +17,7 @@ public class StudentDTO {
     public StudentDTO(Student student){
 this.id=student.getId();
 this.username=student.getUsername();
+this.password=student.getPassword();
 this.email=student.getEmail();
 this.firstname=student.getFirstname();
 this.lastname=student.getLastname();

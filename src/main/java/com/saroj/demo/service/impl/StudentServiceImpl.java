@@ -1,14 +1,29 @@
 package com.saroj.demo.service.impl;
 
 import com.saroj.demo.dto.StudentDTO;
+import com.saroj.demo.model.Student;
+import com.saroj.demo.repository.StudentRepository;
 import com.saroj.demo.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Service
 public class StudentServiceImpl implements StudentService {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
     @Override
     public StudentDTO addStudent(StudentDTO studentDTO) {
-        return null;
+        Student student= new Student(studentDTO);
+        Student savedStudent= studentRepository.save(student);
+        StudentDTO savedStudentDTO= new StudentDTO(savedStudent);
+        return savedStudentDTO;
     }
 
     @Override
@@ -18,7 +33,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> findAll() {
-        return null;
+List <Student> students = studentRepository.findAll();
+List <StudentDTO> studentDTOS= new ArrayList<>();
+for(Student student: students) {
+    StudentDTO studentDTO = new StudentDTO(student);
+    studentDTOS.add(studentDTO);
+}
+return studentDTOS;
     }
 
     @Override
