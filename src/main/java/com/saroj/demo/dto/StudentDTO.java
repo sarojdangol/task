@@ -1,16 +1,8 @@
-package com.saroj.demo.model;
+package com.saroj.demo.dto;
 
+import com.saroj.demo.model.Student;
 
-import com.saroj.demo.dto.StudentDTO;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name="student")
-public class Student {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class StudentDTO {
     private int id;
     private String username;
     private String password;
@@ -19,28 +11,26 @@ public class Student {
     private String lastname;
     private String address;
 
-    public Student(int id, String username, String password, String email, String firstname, String lastname, String address) {
-        this.id= id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
+    public StudentDTO() {
     }
 
-    public Student() {
+    public StudentDTO(Student student){
+this.id=student.getId();
+this.username=student.getUsername();
+this.email=student.getEmail();
+this.firstname=student.getFirstname();
+this.lastname=student.getLastname();
+this.address=student.getAddress();
     }
 
-    public Student(StudentDTO studentDTO){
-        this.id= studentDTO.getId();
-        this.username = studentDTO.getUsername();
-        this.password = studentDTO.getPassword();
-        this.email = studentDTO.getEmail();
-        this.firstname = studentDTO.getFirstname();
-        this.lastname = studentDTO.getLastname();
-        this.address = studentDTO.getAddress();
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -87,13 +77,5 @@ public class Student {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
