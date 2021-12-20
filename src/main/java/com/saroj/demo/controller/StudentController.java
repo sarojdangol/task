@@ -29,4 +29,15 @@ public class StudentController {
     public StudentDTO getById(@PathVariable int id){
         return studentService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable int id){
+        studentService.deleteStudent(id);
+        return "User of id :"+id+"deleted";
+    }
+
+    @PutMapping
+    public StudentDTO updateStudent(@RequestBody StudentDTO studentDTO){
+        return studentService.updateStudent(studentDTO);
+    }
 }

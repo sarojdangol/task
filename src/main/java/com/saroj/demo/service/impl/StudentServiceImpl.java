@@ -53,11 +53,14 @@ return studentDTOS;
 
     @Override
     public StudentDTO updateStudent(StudentDTO studentDTO) {
-        return null;
+        Student student= new Student(studentDTO);
+        Student updatedStudent = studentRepository.save(student);
+        StudentDTO updatedStudentDTO= new StudentDTO(updatedStudent);
+        return updatedStudentDTO;
     }
 
     @Override
     public void deleteStudent(int id) {
-        
+        studentRepository.deleteById(id);
     }
 }
