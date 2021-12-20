@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +29,15 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO findById(int id) {
-        return null;
+       Optional<Student> studentOptional= studentRepository.findById(id);
+//       StudentDTO studentDTO=null;
+//       if(studentOptional.isPresent()){
+//           studentDTO= new StudentDTO(studentOptional.get());
+//
+//       }
+        Student student = studentOptional.orElseThrow(()-> new RuntimeException("User with given id not found"));
+        StudentDTO studentDTO=new StudentDTO((student));
+        return studentDTO;
     }
 
     @Override
@@ -49,6 +58,6 @@ return studentDTOS;
 
     @Override
     public void deleteStudent(int id) {
-
+        
     }
 }

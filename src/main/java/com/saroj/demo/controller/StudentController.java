@@ -25,4 +25,8 @@ public class StudentController {
         return studentService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public StudentDTO getById(@PathVariable int id){
+        return studentService.findById(id);
+    }
 }
